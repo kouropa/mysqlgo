@@ -9,9 +9,12 @@ services:
       MYSQL_USER: user
       MYSQL_PASSWORD: password
       MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_ROOT_HOST: 127.0.0.1 #add 
+
     ports:
-      - "3314:3306"
+      - "3306:3306"
     volumes:
       - ./docker/mysql/initdb.d:/docker-entrypoint-initdb.d
       - ./docker/mysql/conf.d:/etc/mysql/conf.d
-      - ./log/mysql:/var/log/mysql
+      - ./docker/mysql_data:/var/lib/mysql #データをマウントして入れたデータがコンテナを落としても消えない
+      - ./log/mysql:/var/log/mysql/
