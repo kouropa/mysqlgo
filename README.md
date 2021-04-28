@@ -10,3 +10,7 @@ mysql -u user -p # ログインする password で入れる。
 # コンテナ外からログインする
 mysql -u user -h  127.0.0.1 -ppassword
 
+#データベースの中を見る
+show databases;
+use sample_db;
+select from users;
