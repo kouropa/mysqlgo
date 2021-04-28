@@ -7,3 +7,6 @@ docker exec -it mysqlgo_db_1　bash　
 mysql -u user -p # ログインする password で入れる。
 
 
+# コンテナ外からログインする
+mysql -u user -h  127.0.0.1 -ppassword
+
