@@ -4,11 +4,12 @@ FROM golang:${GO_VERSION}-alpine AS builder
 
 RUN apk update && apk add alpine-sdk git && rm -rf /var/cache/apk/*
 
-RUN mkdir -p /app
-WORKDIR /app
-COPY . /app
+RUN mkdir -p /go/src/app
+WORKDIR /go/src/app
+COPY . /go/src/app
+ENV  GO111MODULE=on
 RUN go mod init gin
-#RUN go get -u github.com/gin-gonic/gin 
+RUN go get -u github.com/gin-gonic/gin 
 
 #CMD ["go", "get", "-u" ,"github.com/gin-gonic/gin" ]
 # COPY go.mod .

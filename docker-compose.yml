@@ -1,6 +1,7 @@
 version: '3'                 # docker-composeのversionを指定
 services:
   db:
+    container_name: mysql
     build: ./docker/mysql       # Dockerfileの置き場所を指定
     image: mysql:5.7
     restart: always
@@ -19,6 +20,7 @@ services:
       - ./docker/mysql_data:/var/lib/mysql #データをマウントして入れたデータがコンテナを落としても消えない
       - ./log/mysql:/var/log/mysql/
   go:
+    container_name: go
     build:
       context: ./docker/go
       dockerfile: Dockerfile
@@ -26,7 +28,7 @@ services:
     stdin_open: true
     tty: true
     volumes:
-      - .:/app
+      - .:/go/src/app
     ports:
       - 8080:8080
     
