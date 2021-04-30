@@ -22,3 +22,7 @@ use sample_db;
 
 select from users;
 # docker-mysql-gin
+
+goのコンテナに入る
+
+docker-compose exec go /bin/sh
