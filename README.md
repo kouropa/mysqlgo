@@ -26,3 +26,6 @@ select from users;
 goのコンテナに入る
 
 docker-compose exec go /bin/sh
+
+＃RUN コマンドではmodファイルに書き込みがされないのでコンテナに入ってginを入れる。
+go get -u github.com/gin-gonic/gin 
