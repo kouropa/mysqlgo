@@ -4,6 +4,10 @@ docker-compose up -d # コンテナを作成しスタートする
 
 docker exec -it mysqlgo_db_1　bash　
 
+もしくは
+docker-compose  exec  db  bash
+
+
 mysql -u user -p # ログインする password で入れる。
 
 
