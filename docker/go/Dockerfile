@@ -8,8 +8,15 @@ RUN mkdir -p /go/src/app
 WORKDIR /go/src/app
 COPY . /go/src/app
 ENV  GO111MODULE=on
-RUN go mod init gin
-RUN go get -u github.com/gin-gonic/gin 
+#RUN go mod init gin
+#RUN go get -u github.com/gin-gonic/gin 
+
+#RUN go get -u github.com/oxequa/realize 
+ #   && go get github.com/go-sql-driver/mysql
+#CMD ["realize", "start"]
+
+# RUN go get -u github.com/oxequa/realize \
+#     && go get github.com/go-sql-driver/mysql
 
 #CMD ["go", "get", "-u" ,"github.com/gin-gonic/gin" ]
 # COPY go.mod .

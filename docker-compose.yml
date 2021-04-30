@@ -10,8 +10,8 @@ services:
       MYSQL_USER: user
       MYSQL_PASSWORD: password
       MYSQL_ROOT_PASSWORD: rootpassword
-      MYSQL_ROOT_HOST: 127.0.0.1 #add 
-
+      MYSQL_ROOT_HOST: dockerMySQL   # 追加!! #add 
+      TZ: Asia/Tokyo
     ports:
       - "3306:3306"
     volumes:
@@ -19,16 +19,25 @@ services:
       - ./docker/mysql/conf.d:/etc/mysql/conf.d
       - ./docker/mysql_data:/var/lib/mysql #データをマウントして入れたデータがコンテナを落としても消えない
       - ./log/mysql:/var/log/mysql/
+    extra_hosts: # <-- this is how the db can be located.
+      - "db:172.25.0.103"
   go:
     container_name: go
     build:
       context: ./docker/go
       dockerfile: Dockerfile
-      ##command: /bin/sh -c "go run main.go"
+      #command: /bin/sh -c "go run ./docker/go/main.go"
     stdin_open: true
     tty: true
     volumes:
       - .:/go/src/app
     ports:
       - 8080:8080
-    
+    depends_on:
+      - db
+    environment:
+      MYSQL_DATABASE: sample_db
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_ROOT_HOST: dockerMySQL   # 追加!! #add 
