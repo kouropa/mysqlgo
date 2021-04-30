@@ -18,3 +18,15 @@ services:
       - ./docker/mysql/conf.d:/etc/mysql/conf.d
       - ./docker/mysql_data:/var/lib/mysql #データをマウントして入れたデータがコンテナを落としても消えない
       - ./log/mysql:/var/log/mysql/
+  go:
+    build:
+      context: ./docker/go
+      dockerfile: Dockerfile
+      ##command: /bin/sh -c "go run main.go"
+    stdin_open: true
+    tty: true
+    volumes:
+      - .:/app
+    ports:
+      - 8080:8080
+    
