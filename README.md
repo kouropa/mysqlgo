@@ -1,8 +1,11 @@
 # mysqlとdockerの環境構築
 
-docker-compose up -d # コンテナを作成しスタートする
+docker-compose up -d --build # コンテナを作成しスタートする
 
-docker exec -it mysqlgo_db_1　bash　
+# コンテナに入る
+
+docker-compose  exec  db  bash
+
 
 mysql -u user -p # ログインする password で入れる。
 
@@ -17,3 +20,12 @@ show databases;
 use sample_db;
 
 select from users;
+
+# docker-mysql-gin
+
+goのコンテナに入る
+
+docker-compose exec go /bin/sh
+
+＃RUN コマンドではmodファイルに書き込みがされないのでコンテナに入ってginを入れる。
+go get -u github.com/gin-gonic/gin 
