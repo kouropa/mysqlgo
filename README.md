@@ -1,10 +1,9 @@
 # mysqlとdockerの環境構築
 
-docker-compose up -d # コンテナを作成しスタートする
+docker-compose up -d --build # コンテナを作成しスタートする
 
-docker exec -it mysqlgo_db_1　bash　
+# コンテナに入る
 
-もしくは
 docker-compose  exec  db  bash
 
 
@@ -21,6 +20,7 @@ show databases;
 use sample_db;
 
 select from users;
+
 # docker-mysql-gin
 
 goのコンテナに入る
