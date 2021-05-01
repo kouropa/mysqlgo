@@ -27,7 +27,7 @@ func main() {
 
 	
 	
-	db, err := sql.Open("mysql", "user:password@tcp(dockerMySQL:3306)/sample_db")//rootだとアクセスできなかった。あとホスト名はcomposeのコンテナネーム
+	db, err := sql.Open("mysql", "kouropa:password@tcp(dockerMySQL:3306)/golang_db")//rootだとアクセスできなかった。あとホスト名はcomposeのコンテナネーム
 
 	//_, err := gorm.Open("mysql", "root:rootpassword@tcp(dockerMySQL:3306)/sample_db")
 

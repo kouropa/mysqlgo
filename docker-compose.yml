@@ -1,26 +1,26 @@
 version: '3'                 # docker-composeのversionを指定
 services:
   db:
-    container_name: mysql
+    container_name: dockerMySQL
     build: ./docker/mysql       # Dockerfileの置き場所を指定
     image: mysql:5.7
     restart: always
     environment:
-      MYSQL_DATABASE: sample_db
-      MYSQL_USER: user
+      MYSQL_DATABASE: golang_db  #使うDBを書いておく、他だとアクセスできない可能性
+      MYSQL_USER: kouropa
       MYSQL_PASSWORD: password
       MYSQL_ROOT_PASSWORD: rootpassword
-      MYSQL_ROOT_HOST: dockerMySQL   # 追加!! #add 
+      MYSQL_ROOT_HOST: dockerMySQL # 追加!! #add 
       TZ: Asia/Tokyo
     ports:
       - "3306:3306"
     volumes:
       - ./docker/mysql/initdb.d:/docker-entrypoint-initdb.d
       - ./docker/mysql/conf.d:/etc/mysql/conf.d
-      - ./docker/mysql_data:/var/lib/mysql #データをマウントして入れたデータがコンテナを落としても消えない
-      - ./log/mysql:/var/log/mysql/
-    extra_hosts: # <-- this is how the db can be located.
-      - "db:172.25.0.103"
+      - ./docker/mysql/mysql_data:/var/lib/mysql #データをマウントして入れたデータがコンテナを落としても消えない
+      - ./log/mysql:/var/log/mysql/mysql.log
+    # extra_hosts: # <-- this is how the db can be located.
+    #   - "db:172.25.0.103"
   go:
     container_name: go
     build:
@@ -35,11 +35,11 @@ services:
       - 8080:8080
     depends_on:
       - db
-    links:
-      - "db:dockerMySQL"
+    # links:
+    #   - "db:dockerMySQL"
     environment:
-      MYSQL_DATABASE: sample_db
-      MYSQL_USER: user
+      MYSQL_DATABASE: golang_db
+      MYSQL_USER: kouropa
       MYSQL_PASSWORD: password
       MYSQL_ROOT_PASSWORD: rootpassword
       MYSQL_ROOT_HOST: dockerMySQL   # 追加!! #add 
