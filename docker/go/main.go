@@ -14,20 +14,22 @@ import (
 // 	err error
 // )
 
-//User is struct
-// type User struct {
-// 	id    int
-// 	name  string
-// 	email string
-// }
+
+type User struct {
+	id    int
+	name  string
+	email string
+}
 
 // ...略
 
 func main() {
 
-	_, err := sql.Open("mysql", "root:rootpassword@tcp(dockerMySQL:3306)/sample_db")
+	
+	
+	db, err := sql.Open("mysql", "user:password@tcp(dockerMySQL:3306)/sample_db")//rootだとアクセスできなかった。あとホスト名はcomposeのコンテナネーム
 
-	//_, err := gorm.Open("mysql", connection)
+	//_, err := gorm.Open("mysql", "root:rootpassword@tcp(dockerMySQL:3306)/sample_db")
 
 	if err != nil {
 		panic(err)
@@ -36,18 +38,18 @@ func main() {
 		fmt.Println("yessssss")
 	}
 
-	// rows, err := db.Query("SELECT * FROM users")
-	// if err != nil {
-	// 	panic(err.Error())
-	// }
-	// defer rows.Close()
+	rows, err := db.Query("SELECT * FROM users")
+	if err != nil {
+		panic(err.Error())
+	}
+	defer rows.Close()
 
-	// for rows.Next() {
-	// 	var user User
-	// 	err := rows.Scan(&user.id, &user.name, &user.email)
-	// 	if err != nil {
-	// 		panic(err.Error())
-	// 	}
-	// 	fmt.Println(user.id, user.name, user.email)
-	// }
+	for rows.Next() {
+		var user User
+		err := rows.Scan(&user.id, &user.name, &user.email)
+		if err != nil {
+			panic(err.Error())
+		}
+		fmt.Println(user.id, user.name, user.email)
+	}
 }
