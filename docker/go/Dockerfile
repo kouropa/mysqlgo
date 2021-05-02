@@ -1,5 +1,7 @@
-ARG GO_VERSION=1.11
 
+# ヴァージョンを挙げろと言われたのであげる。1.11-1.12 
+ARG GO_VERSION=1.12.4
+#alpineの時はbin/sh 
 FROM golang:${GO_VERSION}-alpine AS builder
 
 RUN apk update && apk add alpine-sdk git && rm -rf /var/cache/apk/*
