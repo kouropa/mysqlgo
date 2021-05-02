@@ -1,9 +1,12 @@
 package main
 
 import (
-	"fmt"
-	//"os"
+	//"database/sql"
 	"database/sql"
+	"fmt"
+
+	//"os"
+	"github.com/jinzhu/gorm"
 
 	//_ "github.com/jinzhu/gorm/dialects/mysql"
 	_ "github.com/go-sql-driver/mysql"
@@ -13,43 +16,45 @@ import (
 // 	db  *gorm.DB
 // 	err error
 // )
+const (
+	tableNameUser = "users"
+)
 
+var Db *sql.DB
 
-type User struct {
-	id    int
-	name  string
-	email string
-}
+// type User struct {
+// 	id       int
+// 	uuid     string
+// 	name     string
+// 	email    string
+// 	password string
+// }
 
 // ...略
 
-func main() {
+func gormConnect() *gorm.DB {
+	// DBMS := "mysql"
+	// USER := "kouropa"
+	// PASS := "password"
+	// PROTOCOL := tcp(dockerMySQL:3306)
+	// DBNAME := "dockerMy"
+	// CONNECT := USER + ":" + PASS + "@" + PROTOCOL + "/" + DBNAME
+	// db, err := gorm.Open(DBMS, CONNECT)
+	db, err := gorm.Open("mysql", "kouropa:password@tcp(dockerMySQL:3306)/golang_db") //rootだとアクセスできなかった。あとホスト名はcomposeのコンテナネーム
 
-	
-	
-	db, err := sql.Open("mysql", "kouropa:password@tcp(dockerMySQL:3306)/golang_db")//rootだとアクセスできなかった。あとホスト名はcomposeのコンテナネーム
-
-	//_, err := gorm.Open("mysql", "root:rootpassword@tcp(dockerMySQL:3306)/sample_db")
-
-	if err != nil {
-		panic(err)
-	}
-	if err == nil {
-		fmt.Println("yessssss")
-	}
-
-	rows, err := db.Query("SELECT * FROM users")
 	if err != nil {
 		panic(err.Error())
 	}
-	defer rows.Close()
+	fmt.Println("db connected: ", &db)
+	return db
+}
 
-	for rows.Next() {
-		var user User
-		err := rows.Scan(&user.id, &user.name, &user.email)
-		if err != nil {
-			panic(err.Error())
-		}
-		fmt.Println(user.id, user.name, user.email)
-	}
+func main() {
+
+	//Db, err := gorm.Open("mysql", "kouropa:password@tcp(dockerMySQL:3306)/golang_db") //rootだとアクセスできなかった。あとホスト名はcomposeのコンテナネーム
+
+	//_, err := gorm.Open("mysql", "root:rootpassword@tcp(dockerMySQL:3306)/sample_db")
+	db := gormConnect()
+	defer db.Close()
+
 }
