@@ -2,9 +2,12 @@ version: '3'                 # docker-composeのversionを指定
 services:
   db:
     container_name: dockerMySQL
-    build: ./docker/mysql       # Dockerfileの置き場所を指定
-    image: mysql:5.7
-    restart: always
+    build: 
+      dockerfile: ./docker/mysql/Dockerfile
+      context: .       # Dockerfileの置き場所を指定
+    #image: mysql:5.7
+    image: 469085105517.dkr.ecr.ap-northeast-1.amazonaws.com/mysqlgo/mysql
+    #restart: always デプロイのためコメントアウト
     environment:
       MYSQL_DATABASE: golang_db  #使うDBを書いておく、他だとアクセスできない可能性
       MYSQL_USER: kouropa
@@ -14,26 +17,38 @@ services:
       TZ: Asia/Tokyo
     ports:
       - "3306:3306"
-    volumes:
-      - ./docker/mysql/initdb.d:/docker-entrypoint-initdb.d
-      - ./docker/mysql/conf.d:/etc/mysql/conf.d
-      - ./docker/mysql/mysql_data:/var/lib/mysql #データをマウントして入れたデータがコンテナを落としても消えない
-      - ./log/mysql:/var/log/mysql/mysql.log
+
+    ################ボリュームはawsにデプロイする時は使えない？？？？？#####################
+    # volumes:
+    #   - ./docker/mysql/initdb.d:/docker-entrypoint-initdb.d #localのinitdb.dのしたにsqlファイルをおくと実行してくれるる
+    #   - ./docker/mysql/conf.d:/etc/mysql/conf.d
+    #   - ./docker/mysql/mysql_data:/var/lib/mysql #データをマウントして入れたデータがコンテナを落としても消えない
+    #   - ./log/mysql:/var/log/mysql
+    #############################################################
     # extra_hosts: # <-- this is how the db can be located.
     #   - "db:172.25.0.103"
   go:
     container_name: go
-    build:
-      context: ./docker/go
-      dockerfile: Dockerfile
-      #command: /bin/sh -c "go run ./docker/go/main.go"
-    stdin_open: true
-    tty: true
-    volumes:
-      - .:/go/src/app
+    build: 
+      context: .
+      dockerfile: ./docker/go/Dockerfile
+    #command: /bin/sh -c "go run /go/src/app/docker/go/main.go"
+    #command: ["sudo","./wait-for-it.sh", "db:3306", "--", "go", "run","/go/src/app/docker/go/main.go"] #wait
+    #command: /go/src/app/wait-for-it.sh db:3306 -- go run /go/src/app/docker/go/main.go
+    #command: /bin/sh -c '/go/src/app/wait.sh 
+    #image: 469085105517.dkr.ecr.us-east-1.amazonaws.com/mysqlgo2/go
+    image: 469085105517.dkr.ecr.ap-northeast-1.amazonaws.com/mysqlgo/go
+    #image: 469085105517.dkr.ecr.us-east-1.amazonaws.com/mysqlgo2
+
+    # stdin_open: true
+    # tty: true
+    # volumes:
+    #   - .:/go/src/app
+    #entrypoint: ./start.sh
     ports:
-      - 8080:8080
-    depends_on:
+      #- 8080:8080
+      - 80:80
+    depends_on: #起動の順番をしていしているが、稼働の順番をしていているわけではないようだ
       - db
     # links:
     #   - "db:dockerMySQL"
@@ -43,3 +58,6 @@ services:
       MYSQL_PASSWORD: password
       MYSQL_ROOT_PASSWORD: rootpassword
       MYSQL_ROOT_HOST: dockerMySQL   # 追加!! #add 
+        # waitするホストを指定する．
+      # 複数のwait_hostを指定することもできます．(MySQLだけでなくRedisの起動を待ちたい時なども便利です．)
+      # WAIT_HOSTS: db:3306

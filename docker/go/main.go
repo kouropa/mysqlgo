@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"net/http"
 
@@ -27,12 +28,20 @@ type User struct {
 
 func gormConnect() *gorm.DB {
 
-	db, err := gorm.Open("mysql", "kouropa:password@tcp(dockerMySQL:3306)/golang_db?parseTime=true") //rootだとアクセスできなかった。あとホスト名はcomposeのコンテナネーム.parsetimeは時間の取得のために追加
+	path := "kouropa:password@tcp(dockerMySQL:3306)/golang_db?parseTime=true"
+	db, err := gorm.Open("mysql", path) //rootだとアクセスできなかった。あとホスト名はcomposeのコンテナネーム.parsetimeは時間の取得のために追加
 
+	// var count = 0
 	if err != nil {
-		panic(err.Error())
+		fmt.Println("errr")
 	}
+	// 	time.Sleep(time.Second)
+	// 	// カウントダウンさせるようにする
+	// 	count--
+	// 	return gormConnect()
+	// }
 	return db
+
 }
 
 // DBの初期化
@@ -241,5 +250,6 @@ func main() {
 
 	})
 
-	router.Run()
+	//router.Run()
+	router.Run(":80")
 }
