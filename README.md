@@ -92,6 +92,13 @@ ECRのリポジトリにプッシュ
 
 docker-compose push 
 
+docker  context ls
+
+デフォルトであるはずなので、作成しておいたmyecscontextに変更
+
+docker compose up
+
+
 # 今のところ
 ①mysqlとgoをdocker Composeでコンテナを立てて連携
 
