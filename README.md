@@ -75,6 +75,23 @@ goland_db/に関する権限がuserにはなかった。ルートでsqlに入る
 ％はローカルホスト以外からのどのホストからでもアクセス可能。
 OpenできてもCRUDができないケースもある。注意するところはコンテナネームとユーザの持ってるDBに対する権限を変更する。できればDockerfileで権限を変更したい。
 
+# awsを使ってデプロイ　
+awsのリポジトリにプッシュできるように変更する
+
+export AWS_PROFILE=user1
+
+確認
+
+aws configure list
+
+aws ecr get-login-password --region ap-northeast-1 | docker login --username AWS --password-stdin 469085105517.dkr.ecr.ap-northeast-1.amazonaws.com
+
+login succesでおけ
+
+ECRのリポジトリにプッシュ
+
+docker-compose push 
+
 # 今のところ
 ①mysqlとgoをdocker Composeでコンテナを立てて連携
 
