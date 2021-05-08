@@ -21,6 +21,16 @@ use sample_db;
 
 select from users;
 
+# 注意ポイント
+db, err := gorm.Open("mysql", "kouropa:password@tcp(dockerMySQL:3306)/golang_db?parseTime=true") 
+//rootだとアクセスできなかった。あとホスト名はcomposeのコンテナネーム.parsetimeは時間の取得のために追加
+
+router.LoadHTMLGlob("docker/go/views/*.html") //ここのパス書き換えたら動いた
+
+dockerのイメージがalpineの時は/bin/shだけどgolangの時は/bash/ 
+
+
+
 # docker-mysql-gin
 
 goのコンテナに入る
