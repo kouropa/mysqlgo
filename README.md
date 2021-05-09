@@ -21,6 +21,7 @@ use sample_db;
 
 select from users;
 
+
 # 注意ポイント
 db, err := gorm.Open("mysql", "kouropa:password@tcp(dockerMySQL:3306)/golang_db?parseTime=true") 
 //rootだとアクセスできなかった。あとホスト名はcomposeのコンテナネーム.parsetimeは時間の取得のために追加
@@ -31,6 +32,8 @@ dockerのイメージがalpineの時は/bin/shだけどgolangの時は/bash/
 
 
 
+=======
+
 # docker-mysql-gin
 
 goのコンテナに入る
@@ -39,6 +42,7 @@ docker-compose exec go /bin/sh
 
 ＃RUN コマンドではmodファイルに書き込みがされないのでコンテナに入ってginを入れる。
 go get -u github.com/gin-gonic/gin 
+
 #db
 
 mysql> SHOW GRANTS FOR user;
@@ -100,6 +104,7 @@ circlCIを組み込む
 AWSの設定をより細かく設定し、実際の運用に近いように構成する。
 
 セキュリティ対策
+
 
 
 
