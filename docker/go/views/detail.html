@@ -13,22 +13,13 @@
     <div class="wrap">
       <div class="input">
         <p>{{.err}}</p>
-        <form action="/new" method="post">
-          <p>いま思っていること :<input type="text" name="content" size="30" placeholder="つぶやくこと"/></p>
-          <p><input type="submit" value="つぶやく" /></p>
+        <p>{{.tweet}}</p>
+        <p>{{.tweet.ID}}</p>
+        <form action="/update/{{.tweet.ID}}" method="post">
+          <p>いま思っていること :<input type="text" name="tweet" size="30" placeholder="つぶやくこと"/></p>
+          <p><input type="submit" value="編集" /></p>
         </form>
-      </div>
-      <div class="indexGet">
-        <ul>
-          {{range.tweets}}
-          <li>
-            {{.Content}}
-            <label><a href="/detail/{{.ID}}">編集</a></label>
-            <label><a href="/delete_check/{{.ID}}">削除</a></label>
-          </li>
-          {{end}}
-        </ul>
-      </div>
+        <p><a href="/">戻る</a></p>
     </div>
   </body>
 </html>

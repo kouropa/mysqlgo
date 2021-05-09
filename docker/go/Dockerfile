@@ -55,4 +55,6 @@ EXPOSE 80
 #ENV GIN_MODE=release
 #ENTRYPOINT ["./app"]
 #RUN go run /go/src/app/docker/go/main.go
-CMD ["go", "run", "/go/src/app/docker/go/main.go"]
+
+##本当はこれでいきたいが、コンテナに入ってから売った方が安全？
+#CMD ["go", "run", "/go/src/app/docker/go/main.go"]
