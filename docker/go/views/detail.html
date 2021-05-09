@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>一覧ページ</title>
+  </head>
+  <body>
+    <header>
+      <h1>つぶやき</h1>
+    </header>
+    <div class="wrap">
+      <div class="input">
+        <p>{{.err}}</p>
+        <p>{{.tweet}}</p>
+        <p>{{.tweet.ID}}</p>
+        <form action="/update/{{.tweet.ID}}" method="post">
+          <p>いま思っていること :<input type="text" name="tweet" size="30" placeholder="つぶやくこと"/></p>
+          <p><input type="submit" value="編集" /></p>
+        </form>
+        <p><a href="/">戻る</a></p>
+    </div>
+  </body>
+</html>
