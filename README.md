@@ -1,6 +1,17 @@
-# mysqlとdockerの環境構築
+# go（gin)、mysql環境をdocker環境構築して簡単なCRUDを実装。awsでデプロイ
+ー使い方ー
 
-docker-compose up -d --build # コンテナを作成しスタートする
+$ git clone this ripository
+
+$ docker-compose up -d --build 
+
+$ docker-comopse exec go bash
+$ go run docker/go/main.go
+
+実際に動いているところ
+http://3.113.12.37/
+
+
 
 # コンテナに入る
 
