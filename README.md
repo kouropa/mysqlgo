@@ -6,6 +6,7 @@ $ git clone this ripository
 $ docker-compose up -d --build 
 
 $ docker-comopse exec go bash
+
 $ go run docker/go/main.go
 
 実際に動いているところ
