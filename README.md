@@ -1,4 +1,4 @@
-# go、gin,mysql環境をdockerで構築して簡単なCRUDを実装。awsでデプロイ
+# goとmysql環境をdockerで構築して簡単なCRUDを実装しawsで公開した
 ー使い方ー
 
 $ git clone this ripository
