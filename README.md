@@ -43,25 +43,28 @@ db, err := gorm.Open("mysql", "kouropa:password@tcp(dockerMySQL:3306)/golang_db?
 router.LoadHTMLGlob("docker/go/views/*.html") //ここのパス書き換えたら動いた
 
 dockerのイメージがalpineの時は/bin/shだけどgolangの時は/bash/ 
+ポイントはどのユーザにどの権限があるのか、とコンテナ名を記述すること、その辺を変更するとアクセスできるようになった。
 
-
+ginはmodがないと使えないエラーがでた。Dockerfileでinitするあたりが正しいのかはこれから調べる必要があるがとりあえず使えるようになった。
 
 =======
 
 # docker-mysql-gin
 
-# 今のところ
-①mysqlとgoをdocker Composeでコンテナを立てて連携
+# 行った事
 
-②modファイルの設定などを行なってginをインストール。ginはmodがないと使えないエラーがでた。Dockerfileでinitするあたりが正しいのかはこれから調べる必要があるがとりあえず使えるようになった。
+mysqlとgoをdocker Composeでコンテナを立てて連携
 
-③mysqlのCRUD操作ををgoで書いた。DBとの連携の部分でDockerComposeの設定をいろいろ変えた。ポイントはどのユーザにどの権限があるのか、とコンテナ名を記述すること、その辺を変更するとアクセスできるようになった。
 
-④ec2インスタンスを作成し、dockerなどをインストールしてインスタンス内で
+つぶやきを投稿してDBに保存、更新、消去、読み出しをできるようにした
+
+ec2インスタンスを作成し、dockerなどをインストールしてインスタンス内で
+
 $ docker-comose up -d --build
+
 $ go run docker/go/main.go
 
-⑤route53とacmの設定を行った
+route53とacmの設定を行った
 
 
 # これからの予定
