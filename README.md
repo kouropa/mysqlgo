@@ -14,7 +14,7 @@ http://3.113.12.37/
 
 ec2にssh接続
 
-ssh -i go-keypair.pem ec2-user@3.113.12.37
+$ ssh -i go-keypair.pem ec2-user@3.113.12.37
 
 # コンテナに入る
 
