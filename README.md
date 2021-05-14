@@ -12,6 +12,10 @@ $ go run docker/go/main.go
 実際に動いているところ
 http://3.113.12.37/
 
+http://kouropa.com
+
+
+
 ec2にssh接続
 
 $ ssh -i go-keypair.pem ec2-user@3.113.12.37
