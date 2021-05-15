@@ -34,14 +34,19 @@ jobs:
         name: ssh
         command: ssh　${USER_NAME}@${HOST_NAME} 
       - run:
+        name: ssh
         command: cd app/mysqlgo 
       - run:
+        name: ssh
         command: git pull
       - run:
+        name: ssh
         command: docker-compose up -d --build
       - run:
+        name: ssh
         command: docker exec go bash
       - run:
+        name: ssh
         command: go run docker/go/main.go
 
 
