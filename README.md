@@ -20,6 +20,13 @@ ec2にssh接続
 
 $ ssh -i go-keypair.pem ec2-user@3.113.12.37
 
+#AWS RDS
+
+EC2のセキュリティグループと、RDSのセキュリティグループのインバウンドルールを変更。mysqlクライアントをインストール、バージョンを合わせる。
+
+$ mysql -u kouropa -h RDSのエンドポイント　-p
+
+
 # コンテナに入る
 
 docker-compose  exec  db  bash
