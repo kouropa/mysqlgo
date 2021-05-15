@@ -30,7 +30,7 @@ jobs:
       - checkout
       # CircleCIに登録した秘密鍵を呼び出す。
       - add_ssh_keys:
-      - run:  ssh ec2-user@3.113.12.37
+      - run: ssh ${USER_NAME}@${HOST_NAME}
       # - run: cd app/mysqlgp
       # - run: git pull
 
