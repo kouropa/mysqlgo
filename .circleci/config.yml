@@ -1,0 +1,47 @@
+# circleCIのバージョン指定
+version: 2
+jobs:
+  build:
+    machine:
+      image: circleci/classic:edge
+    steps:
+# Djangoのテストを実行
+      - checkout
+      # - run:
+      #     name: docker-compose up
+      #     command: docker-compose up -d --build
+      # - run:
+      #     name: sleep for launch db to migrate at Django
+      #     command: sleep 10
+      # - run:
+      #     name: migrate
+      #     command: docker-compose exec go bash
+      # - run:
+      #     name: test
+      #     command: docker-compose run python ./manage.py test
+      # # - run:
+      #     name: docker-compose down
+      #     command: docker-compose down
+# EC2にSSH接続し、デプロイを実行
+  deploy:
+    machine:
+      image: circleci/classic:edge
+    steps:
+      - checkout
+      # CircleCIに登録した秘密鍵を呼び出す。
+      - add_ssh_keys:
+      - run:  ssh -i go-keypair.pem ec2-user@3.113.12.37 'cd app/mysqlgo && git pull && docker-compose up -d --build && docker exec go bash && go run docker/go/main.go'
+
+# テストが成功した場合のみ、deployを実行するようにします。
+workflows:
+  version: 2
+  build_and_deploy:
+    jobs:
+      - build
+      - deploy:
+          requires:
+            - build
+          # masterブランチがpushされた場合のみdeployするようにする。
+          filters:
+            branches:
+              only: main
