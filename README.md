@@ -20,7 +20,7 @@ ec2にssh接続
 
 $ ssh -i go-keypair.pem ec2-user@3.113.12.37
 
-#AWS RDS
+# AWS RDS
 
 EC2のセキュリティグループと、RDSのセキュリティグループのインバウンドルールを変更。mysqlクライアントをインストール、バージョンを合わせる。
 
