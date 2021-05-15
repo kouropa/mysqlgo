@@ -30,7 +30,7 @@ jobs:
       - checkout
       # CircleCIに登録した秘密鍵を呼び出す。
       - add_ssh_keys:
-      - run:  ssh ec2-user@3.113.12.37 && cd app/mysqlgp && git pull
+      - run:  ssh ec2-user@3.113.12.37
       # - run: cd app/mysqlgp
       # - run: git pull
 
@@ -44,7 +44,7 @@ workflows:
       - deploy:
           requires:
             - build
-          # masterブランチがpushされた場合のみdeployするようにする。
+          # mainブランチがpushされた場合のみdeployするようにする。
           filters:
             branches:
               only: main
