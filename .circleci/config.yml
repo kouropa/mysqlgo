@@ -30,7 +30,7 @@ jobs:
       - checkout
       # CircleCIに登録した秘密鍵を呼び出す。
       - add_ssh_keys:
-      - run:  ssh  ec2-user@3.113.12.37 'cd app/mysqlgo && git pull && docker-compose up -d --build && docker exec go bash && go run docker/go/main.go'
+      - run:  ssh  ${USER_NAME}@${HOST_NAME} 'cd app/mysqlgo && git pull && docker-compose up -d --build && docker exec go bash && go run docker/go/main.go'
 
 # テストが成功した場合のみ、deployを実行するようにします。
 workflows:
