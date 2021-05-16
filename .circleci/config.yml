@@ -32,7 +32,9 @@ jobs:
       - add_ssh_keys:
         # fingerprints: 
         #   - "b5:68:12:84:d4:b2:5d:d6:21:0c:0d:45:6c:dd:ee:43"
-      - run: ssh ${USER_NAME}@${HOST_NAME}  "cd app/mysqlgo && git pull "
+
+        ####### &&でsshとそれ以降を繋ぐと、sshしたままでタイムアウトする
+      - run: ssh ${USER_NAME}@${HOST_NAME}  'cd app/mysqlgo && git pull'
       # - run: git pull && docker-compose up -d --build && docker-compose exec go bash && go run docker/go/main.go"
       # - run: cd app/mysqlgp
 
