@@ -34,7 +34,8 @@ jobs:
         #   - "b5:68:12:84:d4:b2:5d:d6:21:0c:0d:45:6c:dd:ee:43"
 
         ####### &&でコマンドをつなぐと、前段のコマンドが正常終了したときに次のコマンドを実行する流れになるので、上記のように指定するとSSHのプロセスがいつまで経っても終わらずにタイムアウトするものと思われます。
-      - run: ssh ${USER_NAME}@${HOST_NAME}  'cd app/mysqlgo && git pull  && sudo docker-compose up -d --build' ##&& sudo docker-compose exec go go run docker/go/main.go'
+      - run: ssh ${USER_NAME}@${HOST_NAME}  'cd app/mysqlgo && git pull  && sudo docker-compose up -d --build'
+      - run: sudo docker-compose exec go go run docker/go/main.go
       # - run: git pull && docker-compose up -d --build && docker-compose exec go bash && go run docker/go/main.go"
       # - run: cd app/mysqlgp 
 
