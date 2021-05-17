@@ -51,6 +51,7 @@ RUN go get -u github.com/jinzhu/gorm
 
 
 EXPOSE 80
+EXPOSE 443
 #EXPOSE 8080
 #ENV GIN_MODE=release
 #ENTRYPOINT ["./app"]
