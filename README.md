@@ -26,6 +26,25 @@ EC2のセキュリティグループと、RDSのセキュリティグループ�
 
 $ mysql -u kouropa -h RDSのエンドポイント　-p
 
+# circleCI
+
+初回は普通にdocker-compose up -d --buildできたはずだが、できなくなった
+
+
+下記のコマンドを実行するとテキストファイルが開かれる
+$sudo visudo
+下記の指定を
+Defaults    secure_path = /sbin:/bin:/usr/sbin:/usr/bin
+下記に変更する
+
+Defaults        env_keep +="PATH"
+
+
+たまにコンテナのイメージとかを削除しないといけないらしい
+Service 'db' failed to build: Error processing tar file(exit status 1): write /var/lib/mysql/ib_logfile1: no space left on device
+
+$ docker system prune
+
 
 # コンテナに入る
 
