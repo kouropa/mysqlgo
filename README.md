@@ -45,6 +45,13 @@ Service 'db' failed to build: Error processing tar file(exit status 1): write /v
 
 $ docker system prune
 
+# AWS ACM
+Aレコードの値＝IPのレコードを消して、新しくAタイプのレコードを追加。値はエイリアスからアプリケーションロードバランサーー東京リージョンーロードバランサーの選択をする。とHTTPSでアクセスできた。
+
+cnameタイプで値をKouropa、名前をルート５３で設定したDNS名にするとhttpsでアクセス可能
+httpでアクセスしてもリダイレクトされるように設定済み。リスナーのルール設定
+
+
 
 # コンテナに入る
 
