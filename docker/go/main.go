@@ -31,7 +31,8 @@ type User struct {
 
 func gormConnect() *gorm.DB {
 
-	path := "kouropa:password@tcp(dockerMySQL:3306)/golang_db?parseTime=true"
+	path := "kouropa:password@tcp(mysql-go-db.cbfo6ipwjonf.ap-northeast-1.rds.amazonaws.com:3306)/golang_db?parseTime=true"
+	// path := "kouropa:password@tcp(dockerMySQL:3306)/golang_db?parseTime=true"
 	db, err := gorm.Open("mysql", path) //rootだとアクセスできなかった。あとホスト名はcomposeのコンテナネーム.parsetimeは時間の取得のために追加
 
 	// var count = 0
