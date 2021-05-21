@@ -45,6 +45,19 @@ Service 'db' failed to build: Error processing tar file(exit status 1): write /v
 
 $ docker system prune
 
+
+# RDS
+ただdockerMySQLのところをRDSのエンドポイント名で置き換えるだけ
+最初はdatabaseがないので中にはいって
+$ create database golang_db;
+日本語を使えるようにする
+
+use golang_db;
+show variables like 'char%'
+で確認。latin1にdatabaseがなってたら変更する
+
+
+
 # AWS ACM
 Aレコードの値＝IPのレコードを消して、新しくAタイプのレコードを追加。値はエイリアスからアプリケーションロードバランサーー東京リージョンーロードバランサーの選択をする。とHTTPSでアクセスできた。
 
