@@ -1,4 +1,4 @@
-# goとmysql環境をdockerで構築して簡単なCRUDを実装しawsで公開した
+# goとMySQL環境をdockerで構築して簡単なCRUDを実装しawsで公開した
 ー使い方ー
 
 $ git clone this ripository
@@ -13,6 +13,8 @@ $ go run docker/go/main.go
 http://3.113.12.37/
 
 http://kouropa.com
+
+
 
 
 
